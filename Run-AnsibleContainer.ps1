@@ -1,3 +1,14 @@
+# Necessary params, to be passed on CMD line
+param (
+        [Parameter(Position=0,Mandatory=$true)][string]$ucpFQDN,
+        [Parameter(Mandatory=$true)][string]$ucpAdmin,
+        [Parameter(Mandatory=$true)][string]$ucpPW,
+        [Parameter(Mandatory=$true)][string]$AnsibleImage,
+        [Parameter(Mandatory=$true)][string]$WindowsTarget,
+        [Parameter(Mandatory=$true)][string]$AnsibleUser,
+        [Parameter(Mandatory=$true)][string]$AnsiblePassword
+    )
+
 # Necessary block to ignore Cert errors, during this session only
 # equivalent to 'Curl -K'
 # for what ever reason, the @" "@ operator doesn't allow whitespace ahead of the multiline string...
@@ -20,7 +31,7 @@ public class TrustAllCertsPolicy : ICertificatePolicy {
     
 function Run-AnsibleContainer{
     param (
-        [Parameter(Mandatory=$true)][string]$ucpFQDN,
+        [Parameter(Position=0,Mandatory=$true)][string]$ucpFQDN,
         [Parameter(Mandatory=$true)][string]$ucpAdmin,
         [Parameter(Mandatory=$true)][string]$ucpPW,
         [Parameter(Mandatory=$true)][string]$AnsibleImage,
@@ -76,4 +87,4 @@ Set-CertPolicy
 
 Start-Sleep -s 5
 
-Run-AnsibleContainer
+Run-AnsibleContainer -ucpFQDN $ucpFQDN -ucpAdmin $ucpAdmin -ucpPW $ucpPW -AnsibleImage $AnsibleImage -WindowsTarget $WindowsTarget -AnsibleUser $AnsibleUser -AnsiblePassword $ANSIBLEPASSWORD
