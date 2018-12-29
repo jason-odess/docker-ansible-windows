@@ -27,8 +27,7 @@ public class TrustAllCertsPolicy : ICertificatePolicy {
 "@
 [System.Net.ServicePointManager]::CertificatePolicy = New-Object TrustAllCertsPolicy
 }
-    
-    
+
 function Run-AnsibleContainer{
     param (
         [Parameter(Position=0,Mandatory=$true)][string]$ucpFQDN,
@@ -87,4 +86,9 @@ Set-CertPolicy
 
 Start-Sleep -s 5
 
-Run-AnsibleContainer -ucpFQDN $ucpFQDN -ucpAdmin $ucpAdmin -ucpPW $ucpPW -AnsibleImage $AnsibleImage -WindowsTarget $WindowsTarget -AnsibleUser $AnsibleUser -AnsiblePassword $ANSIBLEPASSWORD
+if (!$WindowsTarget) {
+    $WindowsTarget = Invoke-RestMethod http://169.254.169.254/latest/meta-data/local-ipv4
+}
+
+
+Run-AnsibleContainer -ucpFQDN $ucpFQDN -ucpAdmin $ucpAdmin -ucpPW $ucpPW -AnsibleImage $AnsibleImage -WindowsTarget $WindowsTarget -AnsibleUser $AnsibleUser -AnsiblePassword $AnsiblePassword
