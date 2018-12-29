@@ -1,12 +1,12 @@
 # Necessary params, to be passed on CMD line
 param (
         [Parameter(Position=0)][string]$ucpFQDN,
-        [Parameter][string]$ucpAdmin,
-        [Parameter][string]$ucpPW,
-        [Parameter][string]$AnsibleImage,
-        [Parameter][string]$WindowsTarget,
-        [Parameter][string]$AnsibleUser,
-        [Parameter][string]$AnsiblePassword
+        [Parameter()][string]$ucpAdmin,
+        [Parameter()][string]$ucpPW,
+        [Parameter()][string]$AnsibleImage,
+        [Parameter()][string]$WindowsTarget,
+        [Parameter()][string]$AnsibleUser,
+        [Parameter()][string]$AnsiblePassword
     )
 
 # Necessary block to ignore Cert errors, during this session only
