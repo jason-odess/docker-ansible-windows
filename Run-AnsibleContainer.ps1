@@ -66,7 +66,7 @@ function Run-AnsibleContainer{
         "EntryPoint" = "/bin/bash"
         "Cmd" = "/tmp/windows-ansible/windows-ansible-playbook/wrapper.sh"
         "HostConfig" = @{ 
-            "AutoRemove" = $true,
+            "AutoRemove" = $true
             "LogConfig" = @{ "Type" = "json-file"}
         }
     } | ConvertTo-Json
